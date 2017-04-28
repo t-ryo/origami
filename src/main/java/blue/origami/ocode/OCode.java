@@ -66,6 +66,8 @@ public interface OCode {
 
 	public OCode thisCode();
 
+	public Object typeRule();
+
 	/* default constructor */
 
 	public default OTypeSystem getTypeSystem() {

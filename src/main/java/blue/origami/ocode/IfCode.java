@@ -99,6 +99,14 @@ public class IfCode extends OParamCode<OEnv> {
 	}
 
 	@Override
+	public Object typeRule() {
+		this.condCode().typeRule();
+		this.thenCode().typeRule();
+		this.elseCode().typeRule();
+		return null;
+	}
+
+	@Override
 	public void generate(OGenerator gen) {
 		gen.pushIf(this);
 	}

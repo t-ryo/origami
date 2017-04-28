@@ -73,6 +73,11 @@ public class ApplyCode extends OMatchedCode<OMethodHandle> implements ODyCode, O
 		return this.getHandled().eval(env, values);
 	}
 
+	@Override
+	public Object typeRule() {
+		return this.getHandled().getReturnType();
+	}
+
 	/* Asm interface */
 
 	@Override

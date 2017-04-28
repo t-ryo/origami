@@ -96,6 +96,14 @@ public class MultiCode extends OParamCode<Void> {
 	}
 
 	@Override
+	public Object typeRule() {
+		for (int i = 0; i < this.nodes.length; i++) {
+			this.nodes[i].typeRule();
+		}
+		return null;
+	}
+
+	@Override
 	public void generate(OGenerator gen) {
 		gen.pushMulti(this);
 	}

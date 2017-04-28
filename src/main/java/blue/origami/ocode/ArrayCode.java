@@ -69,6 +69,12 @@ public class ArrayCode extends OParamCode<Void> implements TypeAnalysis {
 	}
 
 	@Override
+	public Object typeRule() {
+		// TODO 自動生成されたメソッド・スタブ
+		return this.getType();
+	}
+
+	@Override
 	public void generate(OGenerator gen) {
 		gen.pushArray(this);
 	}

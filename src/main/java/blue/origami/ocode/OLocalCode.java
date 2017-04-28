@@ -37,6 +37,12 @@ public class OLocalCode<T> extends OParamCode<T> {
 	}
 
 	@Override
+	public Object typeRule() {
+		// TODO scope?
+		return null;
+	}
+
+	@Override
 	public final void generate(OGenerator gen) {
 		ODebug.FIXME("Don't generate directly");
 	}

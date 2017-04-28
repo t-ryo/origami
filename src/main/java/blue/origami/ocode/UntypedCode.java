@@ -42,6 +42,12 @@ public class UntypedCode extends OParamCode<Tree<?>> implements SyntaxAnalysis, 
 		return this.getHandled();
 	}
 
+	@Override
+	public Object typeRule() {
+		// TODO return Untyped variable?
+		return OUntypedType.class;
+	}
+
 	public OCode typeCheck(OEnv env, OType type) {
 		return this.typeCheck(env, type, this.getSyntaxTree());
 	}

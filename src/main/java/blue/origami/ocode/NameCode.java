@@ -44,6 +44,12 @@ public class NameCode extends OParamCode<String> {
 	}
 
 	@Override
+	public Object typeRule() {
+		// return String.class? or getName()?
+		return null;
+	}
+
+	@Override
 	public void generate(OGenerator gen) {
 		gen.pushName(this);
 	}

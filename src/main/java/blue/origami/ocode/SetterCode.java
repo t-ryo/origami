@@ -54,6 +54,12 @@ public class SetterCode extends OParamCode<OField> implements ODyCode {
 		}
 	}
 
+	@Override
+	public Object typeRule() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
 	public OCode expr() {
 		return this.nodes.length > 1 ? this.nodes[1] : this.nodes[0];
 	}

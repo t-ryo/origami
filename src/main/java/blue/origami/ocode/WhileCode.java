@@ -19,6 +19,12 @@ public class WhileCode extends OParamCode<Void> {
 	}
 
 	@Override
+	public Object typeRule() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
 	public void generate(OGenerator gen) {
 		gen.pushWhile(this);
 	}
@@ -34,4 +40,5 @@ public class WhileCode extends OParamCode<Void> {
 	public OCode bodyCode() {
 		return this.nodes[2];
 	}
+
 }

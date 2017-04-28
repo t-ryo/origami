@@ -50,6 +50,12 @@ public class WarningCode extends OParamCode<OLog> implements OWrapperCode {
 	}
 
 	@Override
+	public Object typeRule() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
 	public void generate(OGenerator gen) {
 		gen.pushWarning(this);
 	}

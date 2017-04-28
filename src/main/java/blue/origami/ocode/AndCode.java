@@ -38,4 +38,9 @@ public class AndCode extends OParamCode<Void> {
 		gen.pushAnd(this);
 	}
 
+	@Override
+	public Object typeRule() {
+		return Boolean.class;
+	}
+
 }

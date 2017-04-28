@@ -43,4 +43,9 @@ public class NullCode extends ValueCode {
 		return this.getType().getDefaultValue();
 	}
 
+	@Override
+	public Object typeRule() {
+		return this.getType();// FIXME
+	}
+
 }

@@ -37,6 +37,11 @@ public class FuncNameCode extends OParamCode<String> {
 	}
 
 	@Override
+	public Object typeRule() {
+		return this.mh.getReturnType();// FIXME
+	}
+
+	@Override
 	public void generate(OGenerator gen) {
 		OFuncType.newFuncCode(this.env, this.mh).generate(gen);
 	}

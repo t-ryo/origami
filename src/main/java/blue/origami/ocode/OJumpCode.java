@@ -37,4 +37,9 @@ public class OJumpCode<T> extends OParamCode<T> {
 		return this;
 	}
 
+	@Override
+	public Object typeRule() {
+		return null;
+	}
+
 }

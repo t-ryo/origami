@@ -34,6 +34,11 @@ public class OrCode extends OParamCode<Void> {
 	}
 
 	@Override
+	public Object typeRule() {
+		return Boolean.class;
+	}
+
+	@Override
 	public void generate(OGenerator gen) {
 		gen.pushOr(this);
 	}

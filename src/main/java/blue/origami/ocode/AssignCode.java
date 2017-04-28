@@ -68,6 +68,13 @@ public class AssignCode extends OParamCode<String> {
 	}
 
 	@Override
+	public Object typeRule() {
+		Object type = this.rightCode().typeRule();
+		// TODO store this.getName(), type
+		return null;
+	}
+
+	@Override
 	public void generate(OGenerator gen) {
 		gen.pushAssign(this);
 	}

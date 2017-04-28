@@ -31,6 +31,11 @@ public class NotCode extends OParamCode<Void> {
 	}
 
 	@Override
+	public Object typeRule() {
+		return Boolean.class;
+	}
+
+	@Override
 	public void generate(OGenerator gen) {
 		gen.pushNot(this);
 	}

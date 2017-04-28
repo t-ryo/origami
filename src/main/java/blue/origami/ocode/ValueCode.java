@@ -42,6 +42,15 @@ public class ValueCode extends OParamCode<Object> {
 	}
 
 	@Override
+	public Object typeRule() {
+		Object v = this.getHandled();
+		if (v instanceof OType) {
+			return v;
+		}
+		return v.getClass();// FIXME
+	}
+
+	@Override
 	public void generate(OGenerator gen) {
 		gen.pushValue(this);
 	}

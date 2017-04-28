@@ -135,6 +135,12 @@ public class ErrorCode extends RuntimeException implements OCode {
 	}
 
 	@Override
+	public Object typeRule() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
 	public void generate(OGenerator gen) {
 		gen.pushError(this);
 	}

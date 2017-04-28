@@ -34,4 +34,10 @@ public class LambdaCode extends OParamCode<OEnv> {
 		gen.pushLambda(this);
 	}
 
+	@Override
+	public Object typeRule() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
 }
