@@ -65,12 +65,6 @@ public class GetterCode extends OParamCode<OField> implements ODyCode {
 	}
 
 	@Override
-	public Object typeRule() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	@Override
 	public MethodHandle getMethodHandle(OEnv env, MethodHandles.Lookup lookup) throws Throwable {
 		return new OGetter(this.getHandled()).getMethodHandle(env, lookup);
 	}
@@ -80,7 +74,12 @@ public class GetterCode extends OParamCode<OField> implements ODyCode {
 		gen.pushGetter(this);
 	}
 
-	@Override
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        // TODO no operation, isn't it?
+    }
+
+    @Override
 	public OCode newAssignCode(OEnv env, OCode right) {
 		OField field = this.getHandled();
 		if (field.isReadOnly) {

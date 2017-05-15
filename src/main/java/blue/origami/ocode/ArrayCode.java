@@ -17,6 +17,7 @@
 package blue.origami.ocode;
 
 import java.lang.reflect.Array;
+import java.util.List;
 
 import blue.origami.lang.OEnv;
 import blue.origami.lang.type.OType;
@@ -68,13 +69,33 @@ public class ArrayCode extends OParamCode<Void> implements TypeAnalysis {
 		return array;
 	}
 
-	@Override
 	public Object typeRule() {
 		// TODO 自動生成されたメソッド・スタブ
 		return this.getType();
 	}
 
-	@Override
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        List<String> tyOfLeft = null;
+        List<String> tyOfRight = null;
+        tyOfLeft.add(this.nodes[0].getType().getLocalName());
+
+        //inversion of typing rule
+        for (int i = 1; i < this.nodes.length; i++) {
+            tyOfRight.add(this.nodes[i].getType().getLocalName());
+            infer.addConstraintEquation(tyOfLeft,tyOfRight);
+            tyOfLeft.clear();
+            tyOfRight.clear();
+            tyOfLeft.add(this.nodes[i].getType().getLocalName());
+        }
+        //typing
+        tyOfRight.add(this.getType().getLocalName());
+
+        infer.addConstraintEquation(tyOfLeft,tyOfRight);
+
+    }
+
+    @Override
 	public void generate(OGenerator gen) {
 		gen.pushArray(this);
 	}

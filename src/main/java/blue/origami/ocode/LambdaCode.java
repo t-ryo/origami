@@ -19,6 +19,8 @@ package blue.origami.ocode;
 import blue.origami.lang.OEnv;
 import blue.origami.lang.OMethodDecl;
 
+import java.util.List;
+
 public class LambdaCode extends OParamCode<OEnv> {
 
 	LambdaCode(OEnv env, OMethodDecl mdecl) {
@@ -34,10 +36,15 @@ public class LambdaCode extends OParamCode<OEnv> {
 		gen.pushLambda(this);
 	}
 
-	@Override
-	public Object typeRule() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        List<String> tyOfLeft = null;
+        List<String> tyOfRight = null;
+        tyOfLeft.add(this.getType().getLocalName());
+        // FIXME: 2017/05/02
+        // λ x:X .λ y:Y .x + y   : S
+        // X -> Y -> S  add this refinement in infer
+    }
+
 
 }

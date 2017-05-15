@@ -39,14 +39,13 @@ public class DeclCode extends OParamCode<Object> {
 	}
 
 	@Override
-	public Object typeRule() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	@Override
 	public void generate(OGenerator gen) {
 		gen.pushDecl(this);
 	}
+
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        //TODO
+    }
 
 }

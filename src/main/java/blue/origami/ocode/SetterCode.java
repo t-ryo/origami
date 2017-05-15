@@ -19,6 +19,7 @@ package blue.origami.ocode;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Optional;
 
 import blue.origami.lang.OEnv;
@@ -54,11 +55,7 @@ public class SetterCode extends OParamCode<OField> implements ODyCode {
 		}
 	}
 
-	@Override
-	public Object typeRule() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+	
 
 	public OCode expr() {
 		return this.nodes.length > 1 ? this.nodes[1] : this.nodes[0];
@@ -73,7 +70,14 @@ public class SetterCode extends OParamCode<OField> implements ODyCode {
 		gen.pushSetter(this);
 	}
 
-	@Override
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        List<String> tyOfLeft = null;
+        List<String> tyOfRight = null;
+        // FIXME: 2017/05/02 i have to grep how the eval goes
+    }
+
+    @Override
 	public MethodHandle getMethodHandle(OEnv env, MethodHandles.Lookup lookup) throws Throwable {
 		return new OSetter(this.getHandled()).getMethodHandle(env, lookup);
 	}

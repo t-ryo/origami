@@ -18,6 +18,8 @@ package blue.origami.ocode;
 
 import blue.origami.lang.OEnv;
 
+import java.util.List;
+
 public class OrCode extends OParamCode<Void> {
 
 	public OrCode(OEnv env, OCode left, OCode right) {
@@ -33,10 +35,24 @@ public class OrCode extends OParamCode<Void> {
 		return b;
 	}
 
-	@Override
-	public Object typeRule() {
-		return Boolean.class;
-	}
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        List<String> tyOfLeft = null;// Bool -> Int == [Bool,Int]
+        List<String> tyOfRight = null;
+
+        //inversion
+        for (int i = 0; i < 1; i++) {
+            tyOfLeft.add(this.getParams()[i].getType().getLocalName());
+            tyOfRight.add("Bool");
+            infer.addConstraintEquation(tyOfLeft,tyOfRight);
+            tyOfLeft.clear();
+            tyOfRight.clear();
+        }
+        // typing
+        tyOfLeft.add(this.getType().getLocalName());
+        tyOfRight.add("Bool");
+        infer.addConstraintEquation(tyOfLeft,tyOfRight);
+    }
 
 	@Override
 	public void generate(OGenerator gen) {

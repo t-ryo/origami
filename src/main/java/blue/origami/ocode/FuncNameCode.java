@@ -37,16 +37,16 @@ public class FuncNameCode extends OParamCode<String> {
 	}
 
 	@Override
-	public Object typeRule() {
-		return this.mh.getReturnType();// FIXME
-	}
-
-	@Override
 	public void generate(OGenerator gen) {
 		OFuncType.newFuncCode(this.env, this.mh).generate(gen);
 	}
 
-	@Override
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        // TODO
+    }
+
+    @Override
 	public OCode newApplyCode(OEnv env, OCode... params) {
 		String name = this.getHandled();
 		return env.get(OFuncCallSite.class).findParamCode(env, name, params);

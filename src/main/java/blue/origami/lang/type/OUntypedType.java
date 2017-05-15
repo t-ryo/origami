@@ -16,7 +16,14 @@
 
 package blue.origami.lang.type;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OUntypedType extends OTypeSystemType {
+
+    public static Map<String,String> term2typeTable = new HashMap<String,String>();
+    public static String typeVariableNameSpace = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
+    private static int typeVariableNameSpaceIndex = typeVariableNameSpace.length();
 
 	OUntypedType(OTypeSystem ts) {
 		super(ts);
@@ -28,9 +35,7 @@ public class OUntypedType extends OTypeSystemType {
 	}
 
 	@Override
-	public String getLocalName() {
-		return "?";
-	}
+	public String getLocalName() {return typeVariableNameSpace.substring(--typeVariableNameSpaceIndex);}
 
 	@Override
 	public boolean isUntyped() {

@@ -106,17 +106,16 @@ public class TryCode extends OParamCode<OEnv> {
 	}
 
 	@Override
-	public Object typeRule() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	@Override
 	public void generate(OGenerator gen) {
 		gen.pushTry(this);
 	}
 
-	public static class CatchCode extends OLocalCode<String> {
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        // no operation
+    }
+
+    public static class CatchCode extends OLocalCode<String> {
 		private final OType exceptionType;
 
 		public CatchCode(OType type, String name, OCode body) {

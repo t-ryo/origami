@@ -20,6 +20,8 @@ import blue.origami.OrigamiContext.LocalVariables;
 import blue.origami.lang.OEnv;
 import blue.origami.lang.type.OType;
 
+import java.util.List;
+
 public class AssignCode extends OParamCode<String> {
 	public final boolean defined;
 	// public OType type;
@@ -39,7 +41,17 @@ public class AssignCode extends OParamCode<String> {
 		return this.defined;
 	}
 
-	public String getName() {
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        List<String> tyOfLeft = null;
+        List<String> tyOfRight = null;
+        tyOfLeft.add(this.getType().getLocalName());
+        tyOfRight.add(this.rightCode().getType().getLocalName());
+
+        infer.addConstraintEquation(tyOfLeft,tyOfRight);
+    }
+
+    public String getName() {
 		return this.getHandled();
 	}
 
@@ -67,12 +79,7 @@ public class AssignCode extends OParamCode<String> {
 		return v;
 	}
 
-	@Override
-	public Object typeRule() {
-		Object type = this.rightCode().typeRule();
-		// TODO store this.getName(), type
-		return null;
-	}
+
 
 	@Override
 	public void generate(OGenerator gen) {

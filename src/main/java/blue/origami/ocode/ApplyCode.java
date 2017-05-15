@@ -19,6 +19,7 @@ package blue.origami.ocode;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import blue.origami.ffi.OCast;
 import blue.origami.lang.ODynamicMethodHandle;
@@ -73,10 +74,15 @@ public class ApplyCode extends OMatchedCode<OMethodHandle> implements ODyCode, O
 		return this.getHandled().eval(env, values);
 	}
 
-	@Override
 	public Object typeRule() {
 		return this.getHandled().getReturnType();
 	}
+	// FIXME remove it
+
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        //TODO
+    }
 
 	/* Asm interface */
 

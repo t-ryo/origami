@@ -66,7 +66,7 @@ public interface OCode {
 
 	public OCode thisCode();
 
-	public Object typeRule();
+    public void getConstraints(OTypeInfer infer);
 
 	/* default constructor */
 

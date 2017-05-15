@@ -35,13 +35,13 @@ public class InstanceOfCode extends OParamCode<OType> {
 	}
 
 	@Override
-	public Object typeRule() {
-		return Boolean.class;
-	}
-
-	@Override
 	public void generate(OGenerator gen) {
 		gen.pushInstanceOf(this);
 	}
+
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+
+    }
 
 }

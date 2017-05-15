@@ -18,18 +18,18 @@ public class WhileCode extends OParamCode<Void> {
 		return ScriptAnalysis.eval(env, this);
 	}
 
-	@Override
-	public Object typeRule() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
 
 	@Override
 	public void generate(OGenerator gen) {
 		gen.pushWhile(this);
 	}
 
-	public OCode condCode() {
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        // no operation
+    }
+
+    public OCode condCode() {
 		return this.nodes[0];
 	}
 

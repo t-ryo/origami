@@ -37,9 +37,10 @@ public class OJumpCode<T> extends OParamCode<T> {
 		return this;
 	}
 
-	@Override
-	public Object typeRule() {
-		return null;
-	}
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        // no operation isn't it?
+    }
+
 
 }

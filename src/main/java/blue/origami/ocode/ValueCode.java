@@ -19,6 +19,8 @@ package blue.origami.ocode;
 import blue.origami.lang.OEnv;
 import blue.origami.lang.type.OType;
 
+import java.util.List;
+
 public class ValueCode extends OParamCode<Object> {
 	public ValueCode(Object handled, OType ty) {
 		super(handled, ty);
@@ -41,14 +43,16 @@ public class ValueCode extends OParamCode<Object> {
 		return v;
 	}
 
-	@Override
-	public Object typeRule() {
-		Object v = this.getHandled();
-		if (v instanceof OType) {
-			return v;
-		}
-		return v.getClass();// FIXME
-	}
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        List<String> tyOfLeft = null;
+        List<String> tyOfRight = null;
+        Object v = this.getHandled();
+        tyOfLeft.add(this.getType().getLocalName());
+        tyOfRight.add(v.getType().getLocalName());
+        infer.addConstraintEquation(tyOfLeft,tyOfRight);
+    }
+
 
 	@Override
 	public void generate(OGenerator gen) {

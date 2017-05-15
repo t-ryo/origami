@@ -19,6 +19,8 @@ package blue.origami.ocode;
 import blue.origami.lang.OEnv;
 import blue.origami.lang.type.OType;
 
+import java.util.List;
+
 public class IfCode extends OParamCode<OEnv> {
 
 	public IfCode(OEnv env, OCode condCode, OCode thenCode, OCode elseCode) {
@@ -46,7 +48,27 @@ public class IfCode extends OParamCode<OEnv> {
 		return false;
 	}
 
-	private OEnv env() {
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        List<String> tyOfLeft = null;
+        List<String> tyOfRight = null;
+
+        tyOfLeft.add(this.condCode().getType().getLocalName());
+        tyOfRight.add("Bool");
+        infer.addConstraintEquation(tyOfLeft, tyOfRight);
+        tyOfLeft.clear();
+        tyOfRight.clear();
+
+        tyOfLeft.add(this.thenCode().getType().getLocalName());
+        tyOfRight.add(this.elseCode().getType().getLocalName());
+        infer.addConstraintEquation(tyOfLeft, tyOfRight);
+        tyOfRight.clear();
+
+        tyOfRight.add(this.getType().getLocalName());
+        infer.addConstraintEquation(tyOfLeft,tyOfRight);
+    }
+
+    private OEnv env() {
 		return this.getHandled();
 	}
 
@@ -96,14 +118,6 @@ public class IfCode extends OParamCode<OEnv> {
 			return this.thenCode().eval(env);
 		}
 		return this.elseCode().eval(env);
-	}
-
-	@Override
-	public Object typeRule() {
-		this.condCode().typeRule();
-		this.thenCode().typeRule();
-		this.elseCode().typeRule();
-		return null;
 	}
 
 	@Override

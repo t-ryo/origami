@@ -21,6 +21,7 @@ import blue.origami.lang.OEnv;
 import blue.origami.lang.type.OType;
 import blue.origami.rule.OFmt;
 
+
 public class NameCode extends OParamCode<String> {
 	private final boolean readOnly;
 
@@ -43,18 +44,17 @@ public class NameCode extends OParamCode<String> {
 		return vars.get(this.getName());
 	}
 
-	@Override
-	public Object typeRule() {
-		// return String.class? or getName()?
-		return null;
-	}
-
-	@Override
+    @Override
 	public void generate(OGenerator gen) {
 		gen.pushName(this);
 	}
 
-	@Override
+    @Override
+    public void getConstraints(OTypeInfer infer) {
+        // TODO: 2017/05/15
+    }
+
+    @Override
 	public OCode newAssignCode(OEnv env, OCode right) {
 		if (this.readOnly) {
 			throw new ErrorCode(env, OFmt.read_only__YY0, this.getName());
