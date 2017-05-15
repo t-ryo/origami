@@ -18,18 +18,18 @@ public class WhileCode extends OParamCode<Void> {
 		return ScriptAnalysis.eval(env, this);
 	}
 
-
 	@Override
 	public void generate(OGenerator gen) {
 		gen.pushWhile(this);
 	}
 
-    @Override
-    public void getConstraints(OTypeInfer infer) {
-        // no operation
-    }
+	@Override
+	public void getConstraints(OTypeInfer infer) {
+		// no operation
+		// cond ?
+	}
 
-    public OCode condCode() {
+	public OCode condCode() {
 		return this.nodes[0];
 	}
 

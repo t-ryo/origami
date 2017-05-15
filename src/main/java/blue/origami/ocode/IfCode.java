@@ -16,10 +16,10 @@
 
 package blue.origami.ocode;
 
+import java.util.ArrayList;
+
 import blue.origami.lang.OEnv;
 import blue.origami.lang.type.OType;
-
-import java.util.List;
 
 public class IfCode extends OParamCode<OEnv> {
 
@@ -48,27 +48,22 @@ public class IfCode extends OParamCode<OEnv> {
 		return false;
 	}
 
-    @Override
-    public void getConstraints(OTypeInfer infer) {
-        List<String> tyOfLeft = null;
-        List<String> tyOfRight = null;
+	@Override
+	public void getConstraints(OTypeInfer infer) {
+		ArrayList<String[][]> typelist = new ArrayList<>();
 
-        tyOfLeft.add(this.condCode().getType().getLocalName());
-        tyOfRight.add("Bool");
-        infer.addConstraintEquation(tyOfLeft, tyOfRight);
-        tyOfLeft.clear();
-        tyOfRight.clear();
+		String[][] rest1 = { { this.condCode().getType().getLocalName() }, { "Bool" } };
+		typelist.add(rest1);
+		String[][] rest2 = { { this.thenCode().getType().getLocalName() },
+				{ this.elseCode().getType().getLocalName() } };
+		typelist.add(rest2);
+		String[][] rest3 = { { this.thenCode().getType().getLocalName() }, { this.getType().getLocalName() } };
+		typelist.add(rest3);
 
-        tyOfLeft.add(this.thenCode().getType().getLocalName());
-        tyOfRight.add(this.elseCode().getType().getLocalName());
-        infer.addConstraintEquation(tyOfLeft, tyOfRight);
-        tyOfRight.clear();
+		infer.addConstraintEquation(typelist);
+	}
 
-        tyOfRight.add(this.getType().getLocalName());
-        infer.addConstraintEquation(tyOfLeft,tyOfRight);
-    }
-
-    private OEnv env() {
+	private OEnv env() {
 		return this.getHandled();
 	}
 

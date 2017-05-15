@@ -16,11 +16,11 @@
 
 package blue.origami.ocode;
 
+import java.util.ArrayList;
+
 import blue.origami.OrigamiContext.LocalVariables;
 import blue.origami.lang.OEnv;
 import blue.origami.lang.type.OType;
-
-import java.util.List;
 
 public class AssignCode extends OParamCode<String> {
 	public final boolean defined;
@@ -41,17 +41,17 @@ public class AssignCode extends OParamCode<String> {
 		return this.defined;
 	}
 
-    @Override
-    public void getConstraints(OTypeInfer infer) {
-        List<String> tyOfLeft = null;
-        List<String> tyOfRight = null;
-        tyOfLeft.add(this.getType().getLocalName());
-        tyOfRight.add(this.rightCode().getType().getLocalName());
+	@Override
+	public void getConstraints(OTypeInfer infer) {
+		ArrayList<String[][]> typelist = new ArrayList<>();
 
-        infer.addConstraintEquation(tyOfLeft,tyOfRight);
-    }
+		String[][] rest = { { this.getType().getLocalName() }, { this.rightCode().getType().getLocalName() } };
+		typelist.add(rest);
 
-    public String getName() {
+		infer.addConstraintEquation(typelist);
+	}
+
+	public String getName() {
 		return this.getHandled();
 	}
 
@@ -78,8 +78,6 @@ public class AssignCode extends OParamCode<String> {
 		vars.put(this.getName(), v);
 		return v;
 	}
-
-
 
 	@Override
 	public void generate(OGenerator gen) {

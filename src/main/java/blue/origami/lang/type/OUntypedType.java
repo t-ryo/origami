@@ -21,9 +21,10 @@ import java.util.Map;
 
 public class OUntypedType extends OTypeSystemType {
 
-    public static Map<String,String> term2typeTable = new HashMap<String,String>();
-    public static String typeVariableNameSpace = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
-    private static int typeVariableNameSpaceIndex = typeVariableNameSpace.length();
+	public static Map<String, String> term2typeTable = new HashMap<>();
+	// public static String typeVariableNameSpace =
+	// "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
+	private static int typeVariableNameSpaceIndex = 0;
 
 	OUntypedType(OTypeSystem ts) {
 		super(ts);
@@ -35,7 +36,9 @@ public class OUntypedType extends OTypeSystemType {
 	}
 
 	@Override
-	public String getLocalName() {return typeVariableNameSpace.substring(--typeVariableNameSpaceIndex);}
+	public String getLocalName() {
+		return String.valueOf(typeVariableNameSpaceIndex++);
+	}
 
 	@Override
 	public boolean isUntyped() {

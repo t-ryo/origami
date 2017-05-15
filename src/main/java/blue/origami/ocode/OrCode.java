@@ -16,9 +16,9 @@
 
 package blue.origami.ocode;
 
-import blue.origami.lang.OEnv;
+import java.util.ArrayList;
 
-import java.util.List;
+import blue.origami.lang.OEnv;
 
 public class OrCode extends OParamCode<Void> {
 
@@ -35,24 +35,23 @@ public class OrCode extends OParamCode<Void> {
 		return b;
 	}
 
-    @Override
-    public void getConstraints(OTypeInfer infer) {
-        List<String> tyOfLeft = null;// Bool -> Int == [Bool,Int]
-        List<String> tyOfRight = null;
+	@Override
+	public void getConstraints(OTypeInfer infer) {
+		// Bool -> Int == [Bool,Int]
+		ArrayList<String[][]> typelist = new ArrayList<>();
 
-        //inversion
-        for (int i = 0; i < 1; i++) {
-            tyOfLeft.add(this.getParams()[i].getType().getLocalName());
-            tyOfRight.add("Bool");
-            infer.addConstraintEquation(tyOfLeft,tyOfRight);
-            tyOfLeft.clear();
-            tyOfRight.clear();
-        }
-        // typing
-        tyOfLeft.add(this.getType().getLocalName());
-        tyOfRight.add("Bool");
-        infer.addConstraintEquation(tyOfLeft,tyOfRight);
-    }
+		// inversion
+		for (int i = 0; i < 2; i++) {
+			String[][] rest = { { this.getParams()[i].getType().getLocalName() }, { "Bool" } };
+			typelist.add(rest);
+		}
+
+		// typing
+		// String[] rest = { this.getType().getLocalName(), "Bool" };
+		// typelist.add(rest);
+
+		infer.addConstraintEquation(typelist);
+	}
 
 	@Override
 	public void generate(OGenerator gen) {

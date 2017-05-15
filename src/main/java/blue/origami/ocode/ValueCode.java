@@ -16,10 +16,10 @@
 
 package blue.origami.ocode;
 
+import java.util.ArrayList;
+
 import blue.origami.lang.OEnv;
 import blue.origami.lang.type.OType;
-
-import java.util.List;
 
 public class ValueCode extends OParamCode<Object> {
 	public ValueCode(Object handled, OType ty) {
@@ -43,16 +43,15 @@ public class ValueCode extends OParamCode<Object> {
 		return v;
 	}
 
-    @Override
-    public void getConstraints(OTypeInfer infer) {
-        List<String> tyOfLeft = null;
-        List<String> tyOfRight = null;
-        Object v = this.getHandled();
-        tyOfLeft.add(this.getType().getLocalName());
-        tyOfRight.add(v.getType().getLocalName());
-        infer.addConstraintEquation(tyOfLeft,tyOfRight);
-    }
+	@Override
+	public void getConstraints(OTypeInfer infer) {
+		ArrayList<String[][]> typelist = new ArrayList<>();
 
+		String[][] rest = { { this.getType().getLocalName() }, { this.getHandled().getType().getLocalName() } };
+		typelist.add(rest);
+
+		infer.addConstraintEquation(typelist);
+	}
 
 	@Override
 	public void generate(OGenerator gen) {
