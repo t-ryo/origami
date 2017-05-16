@@ -1,5 +1,7 @@
 package blue.origami.ocode;
 
+import java.util.ArrayList;
+
 import blue.origami.lang.OEnv;
 import blue.origami.rule.ScriptAnalysis;
 
@@ -25,8 +27,12 @@ public class WhileCode extends OParamCode<Void> {
 
 	@Override
 	public void getConstraints(OTypeInfer infer) {
-		// no operation
-		// cond ?
+		ArrayList<String[][]> typelist = new ArrayList<>();
+
+		String[][] rest = { { this.condCode().getType().getLocalName() }, { "Bool" } };
+		typelist.add(rest);
+
+		infer.addConstraintEquation(typelist);
 	}
 
 	public OCode condCode() {
